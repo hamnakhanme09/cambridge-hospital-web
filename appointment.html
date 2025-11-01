@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambridge Hospital - Book an Appointment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="icon" type="image/svg+xml" href="favicons.jpg">
+
+    <style>
+        :root {
+            --primary-blue: #1e40af; /* Tailwind blue-700 */
+            --light-blue: #3b82f6; /* Tailwind blue-500 */
+            --bg-light: #f3f4f6; /* Tailwind gray-100 */
+            --text-dark: #1f2937; /* Tailwind gray-800 */
+            --cambridge-dark-blue: #0f172a; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+        
+        /* Custom hover effect for Nav links */
+        .nav-link {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-dark);
+        }
+        /* Active link class for Appointment page */
+        .nav-link:hover, .nav-link.active-appointment {
+            background-color: var(--bg-light); 
+            color: var(--primary-blue);
+        }
+        
+        /* Custom styles for the dropdowns */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-out;
+            z-index: 50;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Custom Burger Icon Animation */
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: var(--primary-blue);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-icon.open span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .menu-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.open span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* === APPOINTMENT PAGE SPECIFIC STYLES === */
+        /* Background Image with Blur and Overlay */
+        .appointment-hero-bg {
+            background-image: url('appointment-bg.jpg'); /* Use your chosen image here */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: calc(100vh - 80px); /* Fill remaining viewport height minus header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* The blurred container */
+        .appointment-hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(8px); /* Apply blur effect */
+            z-index: 0;
+            opacity: 0.7; /* Optional: adjust background darkness/opacity */
+        }
+        
+        /* Form container styling */
+        .appointment-form-container {
+            z-index: 10; /* Keep form above the blurred background */
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white overlay for content */
+            max-width: 900px;
+        }
+
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    
+    <header class="shadow-md sticky top-0 z-50 bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="Cambridge Hospital Logo" class="h-14 w-auto" />
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="departments.html" class="nav-link">Departments</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="services.html" class="nav-link flex items-center">
+                            Services 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="services.html#emergency" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Accident and Emergency</a>
+                            <a href="services.html#blood-bank" class="block px-4 py-2 text-gray-700 dropdown-item">Blood Bank</a>
+                            <a href="services.html#clinics" class="block px-4 py-2 text-gray-700 dropdown-item">Clinics</a>
+                            <a href="services.html#day-care" class="block px-4 py-2 text-gray-700 dropdown-item">Day Care</a>
+                            <a href="services.html#operation-theaters" class="block px-4 py-2 text-gray-700 dropdown-item">Operation Theaters</a>
+                            <a href="services.html#nursing" class="block px-4 py-2 text-gray-700 dropdown-item">Nursing Services</a>
+                            <a href="services.html#pharmacy" class="block px-4 py-2 text-gray-700 dropdown-item">Pharmacy Services</a>
+                            <a href="services.html#social-services" class="block px-4 py-2 text-gray-700 dropdown-item">Social Services</a>
+                            <a href="services.html#oncology-support" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Oncology Support Services</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="centres.html" class="nav-link flex items-center">
+                            Centres 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="centres.html#cancer-care" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Cancer Care Centre</a>
+                            <a href="centres.html#heart-vascular" class="block px-4 py-2 text-gray-700 dropdown-item">Heart & Vascular Institute</a>
+                            <a href="centres.html#neuroscience" class="block px-4 py-2 text-gray-700 dropdown-item">Neuroscience Centre</a>
+                            <a href="centres.html#maternal-child" class="block px-4 py-2 text-gray-700 dropdown-item">Maternal & Child Health</a>
+                            <a href="centres.html#orthopaedic" class="block px-4 py-2 text-gray-700 dropdown-item">Orthopaedic Centre</a>
+                            <a href="centres.html#rehabilitation" class="block px-4 py-2 text-gray-700 dropdown-item">Rehabilitation Services</a>
+                            <a href="centres.html#wellness" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Wellness & Preventive Care</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            More 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="academics.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Academics</a>
+                            <a href="vacancies.html" class="block px-4 py-2 text-gray-700 dropdown-item">Vacancies</a>
+                            <a href="succes-stories.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Success Stories</a>
+                        </div>
+                    </div>
+
+                    <a href="doctor.html" class="nav-link">Doctors</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="contact.html" class="nav-link flex items-center">
+                            Contact 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="query.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Query</a>
+                            <a href="feedback.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Feedback</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hidden lg:block ml-6">
+                    <a href="appointment.html" class="px-5 py-2.5 bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out active-appointment">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden items-center space-x-4">
+                    <a href="appointment.html" class="px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book
+                    </a>
+                    <button id="mobile-menu-button" class="menu-icon p-2 rounded-lg">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300">
+            <div class="pt-2 pb-4 space-y-1">
+                <a href="index.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Home</a>
+                <a href="about.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">About</a>
+                <a href="departments.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Departments</a>
+                
+                <div class="px-4">
+                    <button id="services-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Services <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="services-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        </div>
+                </div>
+
+                <div class="px-4">
+                    <button id="centres-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Centres <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="centres-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        </div>
+                </div>
+                
+                <div class="px-4">
+                    <button id="more-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        More <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="more-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="academics.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Academics</a>
+                        <a href="vacancies.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Vacancies</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Success Stories</a>
+                    </div>
+                </div>
+
+                <a href="doctor.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Doctors</a>
+
+                <div class="px-4">
+                    <button id="contact-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="contact-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="query.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Query</a>
+                        <a href="feedback.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Feedback</a>
+                    </div>
+                </div>
+
+                <a href="appointment.html" class="block px-4 py-2 text-base font-medium text-blue-700 bg-blue-50">Book Appointment</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="appointment-hero-bg">
+        <div class="appointment-form-container p-6 sm:p-10 rounded-xl shadow-2xl m-4 w-full">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 text-center mb-4 flex items-center justify-center">
+                <i data-lucide="calendar-plus" class="w-8 h-8 mr-3"></i> Book Your Appointment
+            </h1>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                Please fill out the form below to request an appointment. Our team will contact you within 24 hours to confirm the details.
+            </p>
+
+            <form id="appointmentForm" action="#" method="POST" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Patient Full Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="name" name="name" required 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-150"
+                            placeholder="e.g., Jane Doe" pattern="[A-Za-z\s]{3,}" 
+                            title="Name must contain at least 3 letters and only spaces"
+                        >
+                        <p id="name-error" class="text-xs text-red-500 mt-1 hidden">Please enter a valid full name (letters only).</p>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
+                        <input type="tel" id="phone" name="phone" required 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-150"
+                            placeholder="e.g., +923001234567" pattern="^\+?[0-9\s-]{10,15}$" 
+                            title="Please enter a valid phone number (10-15 digits, including country code if applicable)"
+                        >
+                        <p id="phone-error" class="text-xs text-red-500 mt-1 hidden">Please enter a valid phone number (10-15 digits).</p>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-150"
+                            placeholder="name@example.com"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date <span class="text-red-500">*</span></label>
+                        <input type="date" id="date" name="date" required 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-150"
+                            min="<%= new Date().toISOString().split('T')[0] %>"
+                        >
+                        <p id="date-error" class="text-xs text-red-500 mt-1 hidden">Please select a future date.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Select Department <span class="text-red-500">*</span></label>
+                        <select id="department" name="department" required 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white transition duration-150"
+                        >
+                            <option value="" disabled selected>Choose a Department</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopaedics">Orthopaedics & Trauma</option>
+                            <option value="Oncology">Oncology (Cancer Care)</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Maternal">Obstetrics & Gynaecology</option>
+                            <option value="GeneralSurgery">General Surgery</option>
+                            <option value="InternalMedicine">Internal Medicine</option>
+                            <option value="Dermatology">Dermatology</option>
+                        </select>
+                        <p id="department-error" class="text-xs text-red-500 mt-1 hidden">Please select a department.</p>
+                    </div>
+
+                    <div>
+                        <label for="doctor" class="block text-sm font-medium text-gray-700 mb-1">Select Doctor</label>
+                        <select id="doctor" name="doctor" 
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white transition duration-150"
+                        >
+                            <option value="" disabled selected>Select a Doctor (Optional)</option>
+                            <optgroup label="Cardiology">
+                                <option value="Dr. Omar Khan">Dr. Omar Khan</option>
+                                <option value="Dr. Sara Ali">Dr. Sara Ali</option>
+                            </optgroup>
+                            <optgroup label="Neurology">
+                                <option value="Dr. Zafar Hameed">Dr. Zafar Hameed</option>
+                                <option value="Dr. Layla Saeed">Dr. Layla Saeed</option>
+                            </optgroup>
+                            <optgroup label="Orthopaedics">
+                                <option value="Dr. Faisal Qureshi">Dr. Faisal Qureshi</option>
+                                <option value="Dr. Aisha Malik">Dr. Aisha Malik</option>
+                                <option value="Dr. Bashir Abbasi">Dr. Bashir Abbasi</option>
+                            </optgroup>
+                            <optgroup label="Oncology">
+                                <option value="Dr. Hamid Rehman">Dr. Hamid Rehman</option>
+                                <option value="Dr. Fatima Sohail">Dr. Fatima Sohail</option>
+                            </optgroup>
+                            <optgroup label="Pediatrics">
+                                <option value="Dr. Amna Zeeshan">Dr. Amna Zeeshan</option>
+                                <option value="Dr. Kamal Ahmed">Dr. Kamal Ahmed</option>
+                            </optgroup>
+                            <optgroup label="Maternal">
+                                <option value="Dr. Farah Shah">Dr. Farah Shah</option>
+                                <option value="Dr. Yasmin Tariq">Dr. Yasmin Tariq</option>
+                            </optgroup>
+                            <optgroup label="General Medicine">
+                                <option value="Dr. Imran Javed">Dr. Imran Javed</option>
+                                <option value="Dr. Mehnaz Hasan">Dr. Mehnaz Hasan</option>
+                                <option value="Dr. Shahid Raza">Dr. Shahid Raza</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Visit <span class="text-red-500">*</span></label>
+                    <textarea id="reason" name="reason" rows="3" required 
+                        class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-150"
+                        placeholder="Briefly describe your symptoms or need for the visit (min. 10 characters)"
+                    ></textarea>
+                    <p id="reason-error" class="text-xs text-red-500 mt-1 hidden">Please provide a reason for the visit (min. 10 characters).</p>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" 
+                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-[1.01]"
+                    >
+                        <i data-lucide="send" class="w-5 h-5 mr-3"></i> Request Appointment
+                    </button>
+                </div>
+                
+                <p class="text-center text-xs text-gray-500 mt-4">
+                    Fields marked with <span class="text-red-500">*</span> are mandatory.
+                </p>
+
+                <div id="success-message" class="hidden p-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+                    <span class="font-medium">Request Sent!</span> Your appointment request has been successfully submitted. We will call you soon to confirm the time.
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-blue-900 text-gray-200 pt-12 pb-6" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10 mb-8">
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">About Us</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Every day thousands of people enter the gates of Cambridge Hospital, seeking hope and healing. We are dedicated to providing compassionate, quality, and affordable healthcare services.
+                    </p>
+                    <a href="about.html" class="text-blue-400 text-sm font-medium hover:text-blue-200 transition duration-300">Read More &rarr;</a>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition duration-200">About</a></li>
+                        <li><a href="departments.html" class="hover:text-white transition duration-200">Department</a></li>
+                        <li><a href="services.html" class="hover:text-white transition duration-200">Services</a></li>
+                        <li><a href="centres.html" class="hover:text-white transition duration-200">Centre</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Call Us</span>
+                                (021) 111-456-789
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Email</span>
+                                info@cambridge.edu.pk
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Address</span>
+                                Stadium Road, Karachi, Pakistan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Find Us</h4>
+                    <div class="w-full h-32 bg-blue-800 rounded-lg flex items-center justify-center text-sm text-blue-400">
+                        [Google Map Placeholder]
+                    </div>
+                    <div class="flex space-x-4 mt-4 justify-center md:justify-start">
+                        <i data-lucide="facebook" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="twitter" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="instagram" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="linkedin" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-sm text-blue-400">
+                &copy; 2025 Cambridge Hospital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // 1. Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open', !isOpen);
+        });
+
+        // 2. Mobile Dropdown Toggle Logic
+        function setupMobileDropdown(buttonId, menuId) {
+            const button = document.getElementById(buttonId);
+            const menu = document.getElementById(menuId);
+
+            if (button && menu) {
+                button.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', !menu.classList.contains('hidden'));
+                    }
+                });
+            }
+        }
+
+        // Apply dropdown logic to all mobile dropdowns
+        setupMobileDropdown('services-mobile-toggle', 'services-mobile-menu');
+        setupMobileDropdown('centres-mobile-toggle', 'centres-mobile-menu');
+        setupMobileDropdown('more-mobile-toggle', 'more-mobile-menu');
+        setupMobileDropdown('contact-mobile-toggle', 'contact-mobile-menu');
+
+
+        // 3. Form Validation Logic (Client-side)
+        const form = document.getElementById('appointmentForm');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            let isValid = true;
+
+            // --- Validation Functions ---
+            
+            // Validate Name (at least 3 characters, letters/spaces only)
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('name-error');
+            if (!nameInput.value || !/^[A-Za-z\s]{3,}$/.test(nameInput.value)) {
+                nameError.classList.remove('hidden');
+                nameInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                nameError.classList.add('hidden');
+                nameInput.classList.remove('border-red-500');
+            }
+
+            // Validate Phone (simple pattern for 10-15 digits, optional +)
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phone-error');
+            if (!phoneInput.value || !/^\+?[0-9\s-]{10,15}$/.test(phoneInput.value)) {
+                phoneError.classList.remove('hidden');
+                phoneInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                phoneError.classList.add('hidden');
+                phoneInput.classList.remove('border-red-500');
+            }
+
+            // Validate Date (must be today or future date)
+            const dateInput = document.getElementById('date');
+            const dateError = document.getElementById('date-error');
+            const selectedDate = new Date(dateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Normalize today to midnight for fair comparison
+
+            if (!dateInput.value || selectedDate < today) {
+                dateError.classList.remove('hidden');
+                dateInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                dateError.classList.add('hidden');
+                dateInput.classList.remove('border-red-500');
+            }
+
+            // Validate Department Selection
+            const departmentInput = document.getElementById('department');
+            const departmentError = document.getElementById('department-error');
+            if (!departmentInput.value) {
+                departmentError.classList.remove('hidden');
+                departmentInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                departmentError.classList.add('hidden');
+                departmentInput.classList.remove('border-red-500');
+            }
+
+            // Validate Reason (min length 10)
+            const reasonInput = document.getElementById('reason');
+            const reasonError = document.getElementById('reason-error');
+            if (!reasonInput.value || reasonInput.value.length < 10) {
+                reasonError.classList.remove('hidden');
+                reasonInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                reasonError.classList.add('hidden');
+                reasonInput.classList.remove('border-red-500');
+            }
+
+
+            // --- Submission Logic ---
+            if (isValid) {
+                // In a real application, you would send this data to a server:
+                // fetch('/submit-appointment', { method: 'POST', body: new FormData(form) })
+                // .then(response => { ... })
+                
+                // For demonstration: show success message and reset form
+                successMessage.classList.remove('hidden');
+                form.reset(); 
+
+                // Hide the success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+
+            } else {
+                // If validation failed, scroll to the first invalid field
+                const firstInvalid = document.querySelector('.border-red-500');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambridge Hospital - Our Facilities</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS (You can put this in a separate style.css file) -->
+      <!-- ✅ Favicon -->
+    <link rel="icon" type="image/png" href="logo hospital.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        /* Navbar styles - Copied from index.html for consistency */
+        .navbar {
+            background-color: #0d47a1; /* Darker blue for navbar */
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .navbar .nav-link, .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        .navbar {
+            min-height: 90px; /* default se zyada height */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .navbar .nav-link:hover {
+            color: #bbdefb !important; /* Lighter blue on hover */
+        }
+        .dropdown-menu {
+            background-color: #0d47a1;
+            border: none;
+        }
+        .dropdown-item {
+            color: #fff !important;
+        }
+        .dropdown-item:hover {
+            background-color: #1976d2; /* Slightly lighter blue for dropdown hover */
+            color: #fff !important;
+        }
+        /* Page Header Specific Styles */
+        .page-header {
+             background-image: url('facilities hospital.webp');
+            background-size: cover; 
+             background-position: center; /* image center mai aaye */
+             background-repeat: no-repeat;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e3f2fd;
+        }
+        .page-header h1 {
+            color: #0d47a1;
+            font-weight: 700;
+            font-size: 2.8rem;
+        }
+        .breadcrumb-item a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        .breadcrumb-item.active {
+            color: #555;
+        }
+        /* Content Section Styles */
+        .section-title {
+            color: #0d47a1;
+            font-weight: 600;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        .facility-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .facility-card img {
+            width: 100%;
+            height: 220px; /* Fixed height for consistency */
+            object-fit: cover;
+        }
+        .facility-card .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .facility-card h5 {
+            color: #1976d2;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .facility-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .facility-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .facility-card ul li i {
+            color: #1976d2;
+            margin-right: 8px;
+        }
+        .facility-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        /* Footer styles - Copied from index.html for consistency */
+        .footer {
+            background-color: #0d47a1;
+            color: #fff;
+            padding: 50px 0 20px;
+            font-size: 0.9rem;
+        }
+        .footer .list-unstyled li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer .list-unstyled li a:hover {
+            color: #bbdefb;
+        }
+        .footer .social-icons a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .footer .social-icons a:hover {
+            color: #bbdefb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar - Copied from index.html -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo hospital.png" alt="Cambridge Hospital Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+                Cambridge Hospital
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="departmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Departments
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="departmentsDropdown">
+                            <li><a class="dropdown-item" href="departments.html#helpdesk">Helpdesk</a></li>
+                            <li><a class="dropdown-item" href="departments.html#registration">Registration</a></li>
+                            <li><a class="dropdown-item" href="departments.html#doctors">Doctor Schedule</a></li>
+                            <li><a class="dropdown-item" href="departments.html#billing">Billing & Accounts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" aria-current="page" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Facilities
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+                            <li><a class="dropdown-item" href="#rooms">Rooms</a></li>
+                            <li><a class="dropdown-item" href="#icu">ICU</a></li>
+                            <li><a class="dropdown-item" href="#medical">Medical Facilities</a></li>
+                            <li><a class="dropdown-item" href="#other">Other Facilities</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="services.html#general">General Services</a></li>
+                            <li><a class="dropdown-item" href="services.html#checkups">Health Checkups</a></li>
+                            <li><a class="dropdown-item" href="services.html#specialties">Specialties</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="centresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Centres
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="centresDropdown">
+                            <li><a class="dropdown-item" href="centres.html#diagnostic">Diagnostic Centre</a></li>
+                            <li><a class="dropdown-item" href="centres.html#cancer">Cancer Centre</a></li>
+                            <li><a class="dropdown-item" href="centres.html#heart">Heart Centre</a></li>
+                            <li><a class="dropdown-item" href="centres.html#community">Community Health Centre</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="academics.html">Academics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vacancies.html">Vacancies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">S.Stories</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="query.html">Query</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                     
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header (Breadcrumb + Title) -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+               
+            </nav>
+            <h1 class="mb-0">Our World-Class Facilities</h1>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="container mb-5">
+        <div class="row">
+            <div class="col-12">
+                <p class="lead">At Cambridge Hospital, we are dedicated to providing state-of-the-art medical facilities and a comfortable environment for all our patients. From advanced diagnostic centers to modern patient rooms, every aspect of our hospital is designed with your health and well-being in mind. We continually invest in technology and infrastructure to ensure the highest standards of care.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Content -->
+    <section class="container pb-5">
+
+        <!-- Rooms Section -->
+        <div class="row mb-5" id="rooms">
+            <div class="col-12">
+                <h2 class="section-title">Patient Rooms</h2>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="General ward.webp" class="card-img-top" alt="General Ward">
+                    <div class="card-body">
+                        <h5>General Wards</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle"></i> Spacious and well-ventilated</li>
+                            <li><i class="fas fa-check-circle"></i> Round-the-clock nursing care</li>
+                            <li><i class="fas fa-check-circle"></i> Economical options</li>
+                        </ul>
+                        <p class="facility-description">Our general wards offer a comfortable and caring environment, ensuring patients receive constant medical attention in a shared space.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="private room.png" class="card-img-top" alt="Private Room">
+                    <div class="card-body">
+                        <h5>Private Rooms</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle"></i> Enhanced privacy and comfort</li>
+                            <li><i class="fas fa-check-circle"></i> Attached washroom facilities</li>
+                            <li><i class="fas fa-check-circle"></i> Air-conditioned</li>
+                        </ul>
+                        <p class="facility-description">For patients requiring more privacy, our private rooms come with all essential amenities and a serene atmosphere for recovery.</p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="Deluxe suite.jpg" class="card-img-top" alt="Deluxe Suite">
+                    <div class="card-body">
+                        <h5>Deluxe Suites</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle"></i> Premium comfort and luxury</li>
+                            <li><i class="fas fa-check-circle"></i> Dedicated attendant area</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced entertainment options</li>
+                        </ul>
+                        <p class="facility-description">Our deluxe suites offer a superior experience with added amenities and personalized services for utmost comfort during stay.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ICU Section -->
+        <div class="row mb-5" id="icu">
+            <div class="col-12">
+                <h2 class="section-title">Intensive Care Units (ICU)</h2>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="general icu.jpg" class="card-img-top" alt="General ICU">
+                    <div class="card-body">
+                        <h5>General ICU</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-heartbeat"></i> Advanced Monitoring</li>
+                            <li><i class="fas fa-pump-medical"></i> Ventilator Support</li>
+                            <li><i class="fas fa-user-nurse"></i> 24/7 Specialist Care</li>
+                        </ul>
+                        <p class="facility-description">Equipped with state-of-the-art technology, our General ICU provides critical care for patients with severe medical conditions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="cardiac icu.webp" class="card-img-top" alt="Cardiac ICU">
+                    <div class="card-body">
+                        <h5>Cardiac Intensive Care Unit (CICU)</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-heartbeat"></i> Specialized Cardiac Monitoring</li>
+                            <li><i class="fas fa-user-md"></i> Expert Cardiologist Supervision</li>
+                            <li><i class="fas fa-hospital"></i> Advanced Life Support Systems</li>
+                        </ul>
+                        <p class="facility-description">Dedicated to cardiac patients, our CICU offers specialized care and monitoring for heart-related critical conditions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="surgical icu.jpg" class="card-img-top" alt="Surgical ICU">
+                    <div class="card-body">
+                        <h5>Surgical Intensive Care Unit (SICU)</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-syringe"></i> Post-operative Critical Care</li>
+                            <li><i class="fas fa-band-aid"></i> Infection Control Protocols</li>
+                            <li><i class="fas fa-brain"></i> Neurological Monitoring</li>
+                        </ul>
+                        <p class="facility-description">The SICU provides intensive post-surgical care, ensuring optimal recovery and management of complex surgical cases.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Facilities Section -->
+        <div class="row mb-5" id="medical">
+            <div class="col-12">
+                <h2 class="section-title">Medical Facilities</h2>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="operation theatre.png" class="card-img-top" alt="Operation Theatre">
+                    <div class="card-body">
+                        <h5>Modern Operation Theatres</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-cut"></i> State-of-the-art surgical equipment</li>
+                            <li><i class="fas fa-shield-alt"></i> Sterilized and safe environment</li>
+                            <li><i class="fas fa-microscope"></i> Advanced imaging integration</li>
+                        </ul>
+                        <p class="facility-description">Our operation theatres are equipped with the latest surgical technology to perform a wide range of complex procedures.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="labor room.jpg" class="card-img-top" alt="Labor Room">
+                    <div class="card-body">
+                        <h5>Well-Equipped Labor Rooms</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-baby"></i> Comfortable and supportive environment</li>
+                            <li><i class="fas fa-female"></i> Experienced obstetrics team</li>
+                            <li><i class="fas fa-monitor-heart-rate"></i> Fetal monitoring systems</li>
+                        </ul>
+                        <p class="facility-description">Providing expectant mothers with a safe and caring environment for childbirth, supported by our expert team.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="pharmacy.webp" class="card-img-top" alt="Pharmacy">
+                    <div class="card-body">
+                        <h5>24/7 In-house Pharmacy</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-pills"></i> Wide range of medications</li>
+                            <li><i class="fas fa-clock"></i> Available round-the-clock</li>
+                            <li><i class="fas fa-sync-alt"></i> Timely refills and consultation</li>
+                        </ul>
+                        <p class="facility-description">Our fully stocked pharmacy ensures that patients have access to all necessary medications at any time of day or night.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Essential Facilities Section -->
+        <div class="row mb-5" id="other">
+            <div class="col-12">
+                <h2 class="section-title">Other Essential Facilities</h2>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="cafeteria.webp" class="card-img-top" alt="Cafeteria">
+                    <div class="card-body">
+                        <h5>Cafeteria & Dietary Services</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-utensils"></i> Healthy and hygienic meals</li>
+                            <li><i class="fas fa-cookie-bite"></i> Variety of food options</li>
+                            <li><i class="fas fa-cutlery"></i> Special dietary requirements</li>
+                        </ul>
+                        <p class="facility-description">A clean and comfortable cafeteria offering nutritious meals for patients, visitors, and staff.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="emergency transport.jpg" class="card-img-top" alt="Emergency Transport">
+                    <div class="card-body">
+                        <h5>24/7 Emergency Transport</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-ambulance"></i> Fully equipped ambulance fleet</li>
+                            <li><i class="fas fa-hospital-user"></i> Trained medical staff on board</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Rapid response system</li>
+                        </ul>
+                        <p class="facility-description">Our emergency transport services ensure quick and safe patient transfer to and from the hospital.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="facility-card">
+                    <img src="parking.jpg" class="card-img-top" alt="Parking">
+                    <div class="card-body">
+                        <h5>Visitor Valet Services & Parking</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-car"></i> Ample and secure parking space</li>
+                            <li><i class="fas fa-key"></i> Convenient valet parking option</li>
+                            <li><i class="fas fa-parking"></i> Easy access to hospital entrance</li>
+                        </ul>
+                        <p class="facility-description">Hassle-free parking solutions for visitors, ensuring a smooth experience from arrival to departure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer - Copied from index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <a class="navbar-brand d-flex align-items-center mb-3" href="index.html">
+                        <img src="logo hospital.png" alt="Cambridge Hospital Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+                        <span class="text-white h5 mb-0">Cambridge Hospital</span>
+                    </a>
+                    <p>A century of commitment to health and healing. Trusted by generations, committed to your well-being.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="stories.html">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Important Info</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="vacancies.html">Careers</a></li>
+                        <li><a href="query.html">Patient Query</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Health Ave, City, Country</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@cambridgehospital.com</li>
+                        <li><i class="fas fa-clock me-2"></i> Open 24/7 for Emergencies</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Cambridge Hospital. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

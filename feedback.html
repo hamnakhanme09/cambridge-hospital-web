@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback - Cambridge Hospital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="icon" type="image/svg+xml" href="favicons.jpg">
+
+    <style>
+        :root {
+            --primary-blue: #1e40af; /* Tailwind blue-700 */
+            --light-blue: #3b82f6; /* Tailwind blue-500 */
+            --bg-light: #f3f4f6; /* Tailwind gray-100 */
+            --text-dark: #1f2937; /* Tailwind gray-800 */
+            --cambridge-dark-blue: #0f172a; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+        .nav-link {
+            padding: 0.5rem 0.75rem; 
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-dark);
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--bg-light);
+            color: var(--primary-blue);
+        }
+        /* Dropdown styles for desktop */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-out;
+            z-index: 50;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Custom Burger Icon Animation */
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: var(--primary-blue);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-icon.open span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .menu-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.open span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Unique Background for Forms */
+        .form-bg {
+            background-image: url('doctor-background-nice.jpg'); /* Reuse image for consistency */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Custom radio for rating */
+        .rating-input:checked + .rating-label svg {
+            fill: #f59e0b; /* Tailwind amber-500 */
+            stroke: #f59e0b;
+        }
+        .rating-label svg {
+            transition: all 0.1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    
+    <header class="shadow-md sticky top-0 z-50 bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="Cambridge Hospital Logo" class="h-14 w-auto" />
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="departments.html" class="nav-link">Departments</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="services.html" class="nav-link flex items-center">
+                            Services 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Accident and Emergency</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Blood Bank</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Clinics</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Day Care</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Operation Theaters</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Nursing Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Pharmacy Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Social Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Oncology Support Services</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="centres.html" class="nav-link flex items-center">
+                            Centres 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Cancer Care Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Heart & Vascular Institute</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Neuroscience Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Maternal & Child Health</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Orthopaedic Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Rehabilitation Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Wellness & Preventive Care</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            More 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="academics.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Academics</a>
+                            <a href="vacancies.html" class="block px-4 py-2 text-gray-700 dropdown-item">Vacancies</a>
+                            <a href="succes-stories.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Success Stories</a>
+                        </div>
+                    </div>
+
+                    <a href="doctor.html" class="nav-link">Doctors</a>
+
+                    <div class="dropdown relative group">
+                        <a href="contact.html" class="nav-link active flex items-center">
+                            Contact 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="query.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Query</a>
+                            <a href="feedback.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md active bg-blue-700 text-white">Feedback</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hidden lg:block ml-6">
+                    <a href="appointment.html" class="px-5 py-2.5 bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden items-center space-x-4">
+                    <a href="appointment.html" class="px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book
+                    </a>
+                    <button id="mobile-menu-button" class="menu-icon p-2 rounded-lg">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300">
+            <div class="pt-2 pb-4 space-y-1">
+                <a href="index.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Home</a>
+                <a href="about.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">About</a>
+                <a href="departments.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Departments</a>
+                
+                <div class="px-4">
+                    <button id="services-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Services <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="services-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Accident and Emergency</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Blood Bank</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Clinics</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Day Care</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Operation Theaters</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Nursing Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Pharmacy Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Social Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Oncology Support Services</a>
+                    </div>
+                </div>
+
+                <div class="px-4">
+                    <button id="centres-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Centres <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="centres-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Cancer Care Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Heart & Vascular Institute</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Neuroscience Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Maternal & Child Health</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Orthopaedic Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Rehabilitation Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Wellness & Preventive Care</a>
+                    </div>
+                </div>
+                
+                <div class="px-4">
+                    <button id="more-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        More <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="more-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="academics.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Academics</a>
+                        <a href="vacancies.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Vacancies</a>
+                        <a href="succes-stories.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Success Stories</a>
+                    </div>
+                </div>
+
+                <a href="doctor.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Doctors</a>
+
+                <div class="px-4">
+                    <button id="contact-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-blue-700 bg-blue-50">
+                        Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform rotate-180"></i>
+                    </button>
+                    <div id="contact-mobile-menu" class="pl-4 border-l border-blue-200 space-y-1">
+                        <a href="query.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Query</a>
+                        <a href="feedback.html" class="block py-1 text-sm text-blue-700">Feedback</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="form-bg">
+        <div class="absolute inset-0 bg-white bg-opacity-90"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+            <div class="bg-white p-6 sm:p-10 rounded-xl shadow-2xl border-t-4 border-blue-600">
+                <header class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-2">Share Your Feedback</h1>
+                    <p class="text-lg text-gray-600">Your experience matters! Help us improve our services by providing honest feedback.</p>
+                </header>
+
+                <form id="feedbackForm" onsubmit="return validateFeedbackForm()" class="space-y-6">
+                    
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name (Optional)</label>
+                        <input type="text" id="fullName" name="fullName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., John Doe">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address <span class="text-red-500">*</span></label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="you@example.com">
+                        <p id="emailError" class="text-red-500 text-xs mt-1 hidden">Please enter a valid email address.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Overall Satisfaction <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-2 justify-center sm:justify-start">
+                            <input type="hidden" id="ratingValue" name="ratingValue" required data-error-id="ratingError">
+
+                            <input type="radio" id="star5" name="rating" value="5" class="rating-input hidden" onclick="document.getElementById('ratingValue').value = this.value;">
+                            <label for="star5" class="rating-label cursor-pointer text-gray-400 hover:text-yellow-500 transition duration-150">
+                                <i data-lucide="star" class="w-8 h-8 md:w-10 md:h-10 fill-current"></i>
+                            </label>
+                            <input type="radio" id="star4" name="rating" value="4" class="rating-input hidden" onclick="document.getElementById('ratingValue').value = this.value;">
+                            <label for="star4" class="rating-label cursor-pointer text-gray-400 hover:text-yellow-500 transition duration-150">
+                                <i data-lucide="star" class="w-8 h-8 md:w-10 md:h-10 fill-current"></i>
+                            </label>
+                            <input type="radio" id="star3" name="rating" value="3" class="rating-input hidden" onclick="document.getElementById('ratingValue').value = this.value;">
+                            <label for="star3" class="rating-label cursor-pointer text-gray-400 hover:text-yellow-500 transition duration-150">
+                                <i data-lucide="star" class="w-8 h-8 md:w-10 md:h-10 fill-current"></i>
+                            </label>
+                            <input type="radio" id="star2" name="rating" value="2" class="rating-input hidden" onclick="document.getElementById('ratingValue').value = this.value;">
+                            <label for="star2" class="rating-label cursor-pointer text-gray-400 hover:text-yellow-500 transition duration-150">
+                                <i data-lucide="star" class="w-8 h-8 md:w-10 md:h-10 fill-current"></i>
+                            </label>
+                            <input type="radio" id="star1" name="rating" value="1" class="rating-input hidden" onclick="document.getElementById('ratingValue').value = this.value;">
+                            <label for="star1" class="rating-label cursor-pointer text-gray-400 hover:text-yellow-500 transition duration-150">
+                                <i data-lucide="star" class="w-8 h-8 md:w-10 md:h-10 fill-current"></i>
+                            </label>
+                        </div>
+                        <p id="ratingError" class="text-red-500 text-xs mt-1 hidden">Please select your overall satisfaction rating.</p>
+                    </div>
+
+                    <div class="pt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Feedback Type <span class="text-red-500">*</span></label>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="feedbackType" value="Compliment" class="form-radio text-blue-600 h-4 w-4" required>
+                                <span class="ml-2 text-gray-700">Compliment</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="feedbackType" value="Suggestion" class="form-radio text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-gray-700">Suggestion</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="feedbackType" value="Complaint" class="form-radio text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-gray-700">Complaint</span>
+                            </label>
+                        </div>
+                        <p id="feedbackTypeError" class="text-red-500 text-xs mt-1 hidden">Please select a feedback type.</p>
+                    </div>
+                    
+                    <div>
+                        <label for="details" class="block text-sm font-medium text-gray-700">Feedback Details <span class="text-red-500">*</span></label>
+                        <textarea id="details" name="details" rows="7" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Describe your experience in detail..."></textarea>
+                        <p id="detailsError" class="text-red-500 text-xs mt-1 hidden">Feedback details are required (min 30 characters).</p>
+                    </div>
+
+                    <div id="successMessage" class="hidden p-4 bg-green-100 text-green-700 rounded-md border border-green-300 flex items-center" role="alert">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-3"></i>
+                        <span class="font-medium">Thank you! Your valuable feedback has been successfully submitted.</span>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out">
+                            Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-blue-900 text-gray-200 pt-12 pb-6 mt-16" id="footer-contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10 mb-8">
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">About Us</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Every day thousands of people enter the gates of Cambridge Hospital, seeking hope and healing. We are dedicated to providing compassionate, quality, and affordable healthcare services.
+                    </p>
+                    <a href="about.html" class="text-blue-400 text-sm font-medium hover:text-blue-200 transition duration-300">Read More &rarr;</a>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition duration-200">About</a></li>
+                        <li><a href="departments.html" class="hover:text-white transition duration-200">Department</a></li>
+                        <li><a href="services.html" class="hover:text-white transition duration-200">Services</a></li>
+                        <li><a href="centres.html" class="hover:text-white transition duration-200">Centre</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Call Us</span>
+                                (021) 111-456-789
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Email</span>
+                                info@cambridge.edu.pk
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Address</span>
+                                Stadium Road, Karachi, Pakistan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Find Us</h4>
+                    <div class="w-full h-32 bg-blue-800 rounded-lg flex items-center justify-center text-sm text-blue-400">
+                        [Google Map Placeholder]
+                    </div>
+                    <div class="flex space-x-4 mt-4 justify-center md:justify-start">
+                        <i data-lucide="facebook" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="twitter" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="instagram" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="linkedin" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-sm text-blue-400">
+                &copy; 2025 Cambridge Hospital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open', !isOpen);
+        });
+
+        // Mobile Dropdown Toggle Logic
+        function setupMobileDropdown(buttonId, menuId) {
+            const button = document.getElementById(buttonId);
+            const menu = document.getElementById(menuId);
+
+            if (button && menu) {
+                button.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', !menu.classList.contains('hidden'));
+                    }
+                });
+            }
+        }
+
+        // Apply dropdown logic to all mobile dropdowns
+        setupMobileDropdown('services-mobile-toggle', 'services-mobile-menu');
+        setupMobileDropdown('centres-mobile-toggle', 'centres-mobile-menu');
+        setupMobileDropdown('more-mobile-toggle', 'more-mobile-menu');
+        setupMobileDropdown('contact-mobile-toggle', 'contact-mobile-menu');
+
+        // Form Validation Logic
+        function validateFeedbackForm() {
+            let isValid = true;
+            const form = document.getElementById('feedbackForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Elements to validate
+            const email = document.getElementById('email');
+            const ratingValue = document.getElementById('ratingValue');
+            const details = document.getElementById('details');
+            const feedbackType = document.querySelector('input[name="feedbackType"]:checked');
+
+            // Reset errors
+            ['emailError', 'ratingError', 'detailsError', 'feedbackTypeError'].forEach(id => {
+                const element = document.getElementById(id);
+                if(element) element.classList.add('hidden');
+            });
+            successMessage.classList.add('hidden');
+
+            // 1. Email Validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value.trim())) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // 2. Rating Validation
+            if (ratingValue.value === '' || isNaN(parseInt(ratingValue.value))) {
+                document.getElementById('ratingError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // 3. Feedback Type Validation
+            if (!feedbackType) {
+                document.getElementById('feedbackTypeError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // 4. Details Validation (Min length 30)
+            if (details.value.trim().length < 30) {
+                document.getElementById('detailsError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Handle success state
+            if (isValid) {
+                // For demonstration, we prevent actual submission, show success message, and clear form
+                form.reset();
+                successMessage.classList.remove('hidden');
+                // Clear the hidden rating value and deselect stars
+                document.getElementById('ratingValue').value = '';
+                document.querySelectorAll('.rating-input').forEach(input => input.checked = false);
+                document.querySelectorAll('.rating-label svg').forEach(svg => {
+                    svg.style.fill = 'currentColor'; // Reset fill
+                    svg.style.stroke = 'currentColor'; // Reset stroke
+                });
+                lucide.createIcons();
+            }
+
+            return false; // Prevent default form submission for demonstration
+        }
+    </script>
+</body>
+</html>

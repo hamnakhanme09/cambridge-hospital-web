@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambridge Hospital - Specialized Centres</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="icon" type="image/svg+xml" href="favicons.jpg">
+
+    <style>
+        :root {
+            --primary-blue: #1e40af; /* Tailwind blue-700 */
+            --light-blue: #3b82f6; /* Tailwind blue-500 */
+            --bg-light: #f3f4f6; /* Tailwind gray-100 */
+            --text-dark: #1f2937; /* Tailwind gray-800 */
+            --cambridge-dark-blue: #0f172a; /* Slightly darker than blue-900 for the logo text */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+        
+        /* === FIX: Scroll Padding for Fixed Header Overlap (Crucial) === */
+        html {
+            scroll-padding-top: 6rem; /* Ensures section anchors stop below the sticky header */
+        }
+        
+        /* Custom hover effect for Nav links (NEW BOX EFFECT) */
+        .nav-link {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-dark);
+        }
+        /* Adjusted active link for the centres page */
+        .nav-link:hover, .nav-link.active-centres {
+            background-color: var(--bg-light); /* Light gray background on hover/active */
+            color: var(--primary-blue);
+        }
+        
+        /* Custom styles for the dropdowns - ensures display on hover for desktop */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-out;
+            z-index: 50;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Custom Burger Icon Animation */
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: var(--primary-blue);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-icon.open span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .menu-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.open span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        /* Custom Hero Section Background for Centres page */
+        .centres-hero-bg {
+            /* IMPORTANT: Change 'centres-hero.jpg' to your desired image file name */
+            background-image: url('centres-hero.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    
+    <header class="shadow-md sticky top-0 z-50 bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="Cambridge Hospital Logo" class="h-14 w-auto" />
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="departments.html" class="nav-link">Departments</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="services.html" class="nav-link flex items-center">
+                            Services 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="services.html#emergency" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Accident and Emergency</a>
+                            <a href="services.html#blood-bank" class="block px-4 py-2 text-gray-700 dropdown-item">Blood Bank</a>
+                            <a href="services.html#clinics" class="block px-4 py-2 text-gray-700 dropdown-item">Clinics</a>
+                            <a href="services.html#day-care" class="block px-4 py-2 text-gray-700 dropdown-item">Day Care</a>
+                            <a href="services.html#operation-theaters" class="block px-4 py-2 text-gray-700 dropdown-item">Operation Theaters</a>
+                            <a href="services.html#nursing" class="block px-4 py-2 text-gray-700 dropdown-item">Nursing Services</a>
+                            <a href="services.html#pharmacy" class="block px-4 py-2 text-gray-700 dropdown-item">Pharmacy Services</a>
+                            <a href="services.html#social-services" class="block px-4 py-2 text-gray-700 dropdown-item">Social Services</a>
+                            <a href="services.html#oncology-support" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Oncology Support Services</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="centres.html" class="nav-link active-centres flex items-center">
+                            Centres 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#cancer-care" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Cancer Care Centre</a>
+                            <a href="#heart-vascular" class="block px-4 py-2 text-gray-700 dropdown-item">Heart & Vascular Institute</a>
+                            <a href="#neuroscience" class="block px-4 py-2 text-gray-700 dropdown-item">Neuroscience Centre</a>
+                            <a href="#maternal-child" class="block px-4 py-2 text-gray-700 dropdown-item">Maternal & Child Health</a>
+                            <a href="#orthopaedic" class="block px-4 py-2 text-gray-700 dropdown-item">Orthopaedic Centre</a>
+                            <a href="#rehabilitation" class="block px-4 py-2 text-gray-700 dropdown-item">Rehabilitation Services</a>
+                            <a href="#wellness" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Wellness & Preventive Care</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            More 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="academics.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Academics</a>
+                            <a href="vacancies.html" class="block px-4 py-2 text-gray-700 dropdown-item">Vacancies</a>
+                            <a href="succes-stories.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Success Stories</a>
+                        </div>
+                    </div>
+
+                    <a href="doctor.html" class="nav-link">Doctors</a>
+
+                    <div class="dropdown relative group">
+                        <a href="contact.html" class="nav-link flex items-center">
+                            Contact 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="query.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Query</a>
+                            <a href="feedback.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Feedback</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hidden lg:block ml-6">
+                    <a href="appointment.html" class="px-5 py-2.5 bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden items-center space-x-4">
+                    <a href="appointment.html" class="px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book
+                    </a>
+                    <button id="mobile-menu-button" class="menu-icon p-2 rounded-lg">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300">
+            <div class="pt-2 pb-4 space-y-1">
+                <a href="index.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Home</a>
+                <a href="about.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">About</a>
+                <a href="departments.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Departments</a>
+                
+                <div class="px-4">
+                    <button id="services-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Services <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="services-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="services.html#emergency" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Accident and Emergency</a>
+                        <a href="services.html#blood-bank" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Blood Bank</a>
+                        <a href="services.html#clinics" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Clinics</a>
+                        <a href="services.html#day-care" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Day Care</a>
+                        <a href="services.html#operation-theaters" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Operation Theaters</a>
+                        <a href="services.html#nursing" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Nursing Services</a>
+                        <a href="services.html#pharmacy" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Pharmacy Services</a>
+                        <a href="services.html#social-services" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Social Services</a>
+                        <a href="services.html#oncology-support" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Oncology Support Services</a>
+                    </div>
+                </div>
+
+                <div class="px-4">
+                    <button id="centres-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-blue-700 bg-blue-50">
+                        Centres <i data-lucide="chevron-down" class="w-4 h-4 transition-transform rotate-180"></i>
+                    </button>
+                    <div id="centres-mobile-menu" class="pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#cancer-care" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Cancer Care Centre</a>
+                        <a href="#heart-vascular" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Heart & Vascular Institute</a>
+                        <a href="#neuroscience" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Neuroscience Centre</a>
+                        <a href="#maternal-child" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Maternal & Child Health</a>
+                        <a href="#orthopaedic" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Orthopaedic Centre</a>
+                        <a href="#rehabilitation" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Rehabilitation Services</a>
+                        <a href="#wellness" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Wellness & Preventive Care</a>
+                    </div>
+                </div>
+                
+                <div class="px-4">
+                    <button id="more-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        More <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="more-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="academics.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Academics</a>
+                        <a href="vacancies.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Vacancies</a>
+                        <a href="succes-stories.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Success Stories</a>
+                    </div>
+                </div>
+
+                <a href="doctor.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Doctors</a>
+
+                <div class="px-4">
+                    <button id="contact-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="contact-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="query.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Query</a>
+                        <a href="feedback.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Feedback</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="centres-hero-bg text-white py-24 md:py-32 relative overflow-hidden">
+            <div class="absolute inset-0 bg-blue-900 bg-opacity-70"></div> 
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-3 flex items-center">
+                    <i data-lucide="heart-pulse" class="w-10 h-10 mr-4"></i> Centres of Excellence
+                </h1>
+                <p class="text-xl md:text-2xl font-light max-w-4xl">
+                    Focused, specialized care delivered by leading experts in state-of-the-art facilities. Discover our dedicated centers.
+                </p>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-900 mb-12">
+                Specialized Care for Complex Needs
+            </h2>
+
+            <section id="cancer-care" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-red-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="cancer-centre.jpg" alt="Cancer Care Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-red-700 mb-2 flex items-center">
+                            <i data-lucide="shield-half" class="w-6 h-6 mr-2"></i> Cancer Care Centre
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Advanced Oncology & Compassionate Support</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300" data-target="cancer-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The **Cancer Care Centre** offers comprehensive, multidisciplinary oncology services, combining the latest technology with a deeply human approach. Our team of oncologists, surgeons, radiologists, and support staff work together to provide personalized treatment plans, including chemotherapy, radiation therapy, and targeted therapies.
+                        </p>
+                        <div id="cancer-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Our Specialized Services:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Cutting-edge Linac-based Radiation Therapy</li>
+                                <li>Surgical Oncology (minimally invasive techniques)</li>
+                                <li>Medical Oncology and Chemotherapy suites</li>
+                                <li>Palliative and Pain Management Services</li>
+                                <li>Nutritional and Psychological Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="heart-vascular" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-blue-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="heart-centre.jpg" alt="Heart & Vascular Institute" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2 flex items-center">
+                            <i data-lucide="activity" class="w-6 h-6 mr-2"></i> Heart & Vascular Institute
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Cardiology, Cardiac Surgery, and Prevention</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300" data-target="heart-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The **Heart & Vascular Institute** is dedicated to the diagnosis, treatment, and prevention of cardiovascular diseases. We utilize advanced diagnostic imaging, state-of-the-art cath labs, and a skilled team of cardiothoracic surgeons and interventional cardiologists to perform complex procedures with precision and care.
+                        </p>
+                        <div id="heart-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Key Areas of Expertise:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>24/7 Emergency Cardiac Care and Interventions</li>
+                                <li>Coronary Artery Bypass Grafting (CABG)</li>
+                                <li>Electrophysiology and Pacemaker Implantation</li>
+                                <li>Non-invasive Cardiac Imaging (Echocardiography, CT Angio)</li>
+                                <li>Cardiac Rehabilitation Programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="neuroscience" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-green-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="neuro-centre.jpg" alt="Neuroscience Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2 flex items-center">
+                            <i data-lucide="brain" class="w-6 h-6 mr-2"></i> Neuroscience Centre
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Advanced Neurological and Neurosurgical Treatments</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300" data-target="neuroscience-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Our **Neuroscience Centre** provides specialized care for disorders of the brain, spine, and nervous system. We house some of the region's top neurologists and neurosurgeons, equipped with advanced imaging and surgical navigation systems for procedures like complex spinal surgery and tumor removal.
+                        </p>
+                        <div id="neuroscience-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Advanced Treatments Offered:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Stroke and Epilepsy Management Programs</li>
+                                <li>Microsurgery for Brain and Spinal Tumors</li>
+                                <li>Deep Brain Stimulation (DBS) for movement disorders</li>
+                                <li>Comprehensive Neuro-Rehabilitation</li>
+                                <li>Advanced Diagnostic EEG and EMG Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="maternal-child" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-pink-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="maternal-centre.jpg" alt="Maternal and Child Health Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-pink-700 mb-2 flex items-center">
+                            <i data-lucide="baby" class="w-6 h-6 mr-2"></i> Maternal & Child Health
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Comprehensive Care for Women and Children</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-pink-600 text-white font-semibold rounded-lg hover:bg-pink-700 transition duration-300" data-target="maternal-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Our **Maternal & Child Health Centre** provides a supportive and safe environment for every stage of motherhood and childhood. From personalized prenatal care and advanced labor and delivery suites to specialized pediatric medicine, we are dedicated to the well-being of mothers and their children.
+                        </p>
+                        <div id="maternal-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Services Include:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>High-risk Obstetrics and Neonatal Intensive Care Unit (NICU)</li>
+                                <li>Painless Delivery options and modern Birthing Suites</li>
+                                <li>Specialized Pediatric Subspecialties (e.g., Cardiology, Neurology)</li>
+                                <li>Family Planning and Women's Health Clinics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="orthopaedic" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-indigo-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="ortho-centre.jpg" alt="Orthopaedic Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-indigo-700 mb-2 flex items-center">
+                            <i data-lucide="bone" class="w-6 h-6 mr-2"></i> Orthopaedic Centre
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Musculoskeletal Health and Sports Medicine</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300" data-target="orthopaedic-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The **Orthopaedic Centre** provides comprehensive care for conditions affecting bones, joints, and muscles. Our experts specialize in joint replacement surgery, sports injury management, trauma, and spine surgery, utilizing minimally invasive techniques for faster recovery times.
+                        </p>
+                        <div id="orthopaedic-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Core Specialties:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Total Hip and Knee Replacement Surgery</li>
+                                <li>Arthroscopic and Sports Injury Repair (ACL, Meniscus)</li>
+                                <li>Spine Surgery and Pain Management</li>
+                                <li>Pediatric Orthopaedics</li>
+                                <li>Fracture and Trauma Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rehabilitation" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-teal-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="rehab-centre.jpg" alt="Rehabilitation Services Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2 flex items-center">
+                            <i data-lucide="dumbbell" class="w-6 h-6 mr-2"></i> Rehabilitation Services
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Restoring Function and Quality of Life</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition duration-300" data-target="rehab-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Our **Rehabilitation Services** are designed to help patients regain strength, mobility, and independence after injury, surgery, or illness (like stroke). Our team of physical, occupational, and speech therapists create intensive, goal-oriented programs tailored to each patient's specific needs and recovery goals.
+                        </p>
+                        <div id="rehab-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Therapy Programs:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Post-Surgical and Orthopaedic Physical Therapy</li>
+                                <li>Neurological Rehabilitation (Stroke, Spinal Cord Injury)</li>
+                                <li>Occupational Therapy for daily living skills</li>
+                                <li>Speech and Language Pathology</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wellness" class="bg-gray-50 p-6 md:p-10 rounded-xl shadow-lg mb-16 border-t-8 border-yellow-600">
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <img src="wellness-centre.jpg" alt="Wellness Centre" class="w-full h-64 md:h-72 rounded-lg shadow-md mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-yellow-700 mb-2 flex items-center">
+                            <i data-lucide="leaf" class="w-6 h-6 mr-2"></i> Wellness & Preventive Care
+                        </h3>
+                        <p class="text-sm text-gray-600 italic">Holistic Health and Long-term Well-being</p>
+                        <button class="view-details-toggle mt-4 px-4 py-2 bg-yellow-600 text-white font-semibold rounded-lg hover:bg-yellow-700 transition duration-300" data-target="wellness-details">
+                            View Details
+                        </button>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            More than just treating illness, our **Wellness & Preventive Care Centre** focuses on proactive health management. We offer bespoke health screening packages, lifestyle counseling, chronic disease risk assessment, and personalized vaccination schedules to help you maintain optimal health.
+                        </p>
+                        <div id="wellness-details" class="details-content hidden mt-4 bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-3">Preventative Services Include:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Executive Health Checkups and Screenings</li>
+                                <li>Weight Management and Nutrition Counseling</li>
+                                <li>Smoking Cessation Programs</li>
+                                <li>Stress Management and Mental Wellness Support</li>
+                                <li>Age-specific Immunization Programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-blue-900 text-gray-200 pt-12 pb-6 mt-16" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10 mb-8">
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Academics</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                       At Cambridge Hospital, we are committed not only to healing but also to learning and innovation. Our strong Academic Program trains the next generation of medical leaders through rigorous residency and fellowship programs.
+                    </p>
+                    <a href="academics.html" class="text-blue-400 text-sm font-medium hover:text-blue-200 transition duration-300">Read More &rarr;</a>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition duration-200">About</a></li>
+                        <li><a href="departments.html" class="hover:text-white transition duration-200">Department</a></li>
+                        <li><a href="services.html" class="hover:text-white transition duration-200">Services</a></li>
+                        <li><a href="centres.html" class="hover:text-white transition duration-200">Centre</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Call Us</span>
+                                (021) 111-456-789
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Email</span>
+                                info@cambridge.edu.pk
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Address</span>
+                                Stadium Road, Karachi, Pakistan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Find Us</h4>
+                    <div class="w-full h-32 bg-blue-800 rounded-lg flex items-center justify-center text-sm text-blue-400">
+                        [Google Map Placeholder]
+                    </div>
+                    <div class="flex space-x-4 mt-4 justify-center md:justify-start">
+                        <i data-lucide="facebook" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="twitter" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="instagram" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="linkedin" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-sm text-blue-400">
+                &copy; 2025 Cambridge Hospital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // 1. Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open', !isOpen);
+        });
+
+        // 2. Mobile Dropdown Toggle Logic
+        function setupMobileDropdown(buttonId, menuId) {
+            const button = document.getElementById(buttonId);
+            const menu = document.getElementById(menuId);
+
+            if (button && menu) {
+                button.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', !menu.classList.contains('hidden'));
+                    }
+                });
+            }
+        }
+
+        // Apply dropdown logic to all mobile dropdowns
+        setupMobileDropdown('services-mobile-toggle', 'services-mobile-menu');
+        setupMobileDropdown('centres-mobile-toggle', 'centres-mobile-menu');
+        setupMobileDropdown('more-mobile-toggle', 'more-mobile-menu');
+        setupMobileDropdown('contact-mobile-toggle', 'contact-mobile-menu');
+
+        // 3. View Details Toggle Logic (Show/Hide More Info)
+        const detailToggles = document.querySelectorAll('.view-details-toggle');
+        detailToggles.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const isHidden = targetElement.classList.toggle('hidden');
+                    
+                    // Change button text
+                    button.textContent = isHidden ? 'View Details' : 'Hide Details';
+                    
+                    // Scroll to the button's section if showing details
+                    if (!isHidden) {
+                        // Get the parent section and smoothly scroll to it
+                        const section = button.closest('section');
+                        if (section) {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

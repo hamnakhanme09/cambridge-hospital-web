@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Cambridge Hospital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="icon" type="image/svg+xml" href="favicons.jpg">
+
+  <style>
+    :root {
+        --primary-blue: #1e40af; /* Tailwind blue-700 */
+        --light-blue: #3b82f6; /* Tailwind blue-500 */
+        --bg-light: #f3f4f6; /* Tailwind gray-100 */
+        --text-dark: #1f2937; /* Tailwind gray-800 */
+        --cambridge-dark-blue: #0f172a; /* Slightly darker than blue-900 for the logo text */
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text-dark);
+    }
+    
+    /* === FIX: Add scroll padding for fixed header overlap === */
+    html {
+        scroll-padding-top: 6rem; /* Ensure section anchors stop below the sticky header */
+    }
+    /* ======================================================= */
+    
+    /* Custom hover effect for Nav links (NEW BOX EFFECT) */
+    .nav-link {
+        padding: 0.5rem 0.75rem; /* For the box effect */
+        border-radius: 0.5rem;
+        transition: all 0.2s ease-in-out;
+        color: var(--text-dark);
+    }
+    /* Adjusted active link for the services page */
+    .nav-link:hover, .nav-link.active-services {
+        background-color: var(--bg-light); /* Light gray background on hover/active */
+        color: var(--primary-blue);
+    }
+    
+    /* Custom styles for the dropdowns - ensures display on hover for desktop */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .dropdown-menu {
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease-out;
+        z-index: 50;
+    }
+    .dropdown-item:hover {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+
+    /* Custom Burger Icon Animation */
+    .menu-icon span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px 0;
+        background: var(--primary-blue);
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+    .menu-icon.open span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .menu-icon.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-icon.open span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Modal Backdrop */
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 60; /* Higher than header z-50 */
+    }
+    .modal-content {
+        z-index: 70;
+        max-width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+</style>
+</head>
+<body class="bg-white min-h-screen">
+    
+    <header class="shadow-md sticky top-0 z-50 bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="/" class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="Cambridge Hospital Logo" class="h-14 w-auto" />
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="departments.html" class="nav-link">Departments</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="services.html" class="nav-link active-services flex items-center">
+                            Services 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#emergency" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Accident and Emergency</a>
+                            <a href="#blood-bank" class="block px-4 py-2 text-gray-700 dropdown-item">Blood Bank</a>
+                            <a href="#clinics" class="block px-4 py-2 text-gray-700 dropdown-item">Clinics</a>
+                            <a href="#day-care" class="block px-4 py-2 text-gray-700 dropdown-item">Day Care</a>
+                            <a href="#operation-theaters" class="block px-4 py-2 text-gray-700 dropdown-item">Operation Theaters</a>
+                            <a href="#nursing" class="block px-4 py-2 text-gray-700 dropdown-item">Nursing Services</a>
+                            <a href="#pharmacy" class="block px-4 py-2 text-gray-700 dropdown-item">Pharmacy Services</a>
+                            <a href="#social-services" class="block px-4 py-2 text-gray-700 dropdown-item">Social Services</a>
+                            <a href="#oncology-support" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Oncology Support Services</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="centres.html" class="nav-link flex items-center">
+                            Centres 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Cancer Care Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Heart & Vascular Institute</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Neuroscience Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Maternal & Child Health</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Orthopaedic Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Rehabilitation Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Wellness & Preventive Care</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            More 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="academics.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Academics</a>
+                            <a href="vacancies.html" class="block px-4 py-2 text-gray-700 dropdown-item">Vacancies</a>
+                            <a href="succes-stories.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Success Stories</a>
+                        </div>
+                    </div>
+
+                    <a href="doctor.html" class="nav-link">Doctors</a>
+
+                    <div class="dropdown relative group">
+                        <a href="contact.html" class="nav-link flex items-center">
+                            Contact 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="query.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Query</a>
+                            <a href="feedback.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Feedback</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hidden lg:block ml-6">
+                    <a href="appointment.html" class="px-5 py-2.5 bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden items-center space-x-4">
+                    <a href="appointment.html" class="px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book
+                    </a>
+                    <button id="mobile-menu-button" class="menu-icon p-2 rounded-lg">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300">
+            <div class="pt-2 pb-4 space-y-1">
+                <a href="index.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Home</a>
+                <a href="about.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">About</a>
+                <a href="departments.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Departments</a>
+                
+                <div class="px-4">
+                    <button id="services-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-blue-700 bg-blue-50">
+                        Services <i data-lucide="chevron-up" class="w-4 h-4 transition-transform rotate-180"></i>
+                    </button>
+                    <div id="services-mobile-menu" class="pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#emergency" class="block py-1 text-sm text-blue-700">Accident and Emergency</a>
+                        <a href="#blood-bank" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Blood Bank</a>
+                        <a href="#clinics" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Clinics</a>
+                        <a href="#day-care" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Day Care</a>
+                        <a href="#operation-theaters" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Operation Theaters</a>
+                        <a href="#nursing" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Nursing Services</a>
+                        <a href="#pharmacy" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Pharmacy Services</a>
+                        <a href="#social-services" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Social Services</a>
+                        <a href="#oncology-support" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Oncology Support Services</a>
+                    </div>
+                </div>
+
+                <div class="px-4">
+                    <button id="centres-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Centres <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="centres-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Cancer Care Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Heart & Vascular Institute</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Neuroscience Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Maternal & Child Health</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Orthopaedic Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Rehabilitation Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Wellness & Preventive Care</a>
+                    </div>
+                </div>
+                
+                <div class="px-4">
+                    <button id="more-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        More <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="more-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="academics.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Academics</a>
+                        <a href="vacancies.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Vacancies</a>
+                        <a href="succes-stories.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Success Stories</a>
+                    </div>
+                </div>
+
+                <a href="doctor.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Doctors</a>
+
+                <div class="px-4">
+                    <button id="contact-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="contact-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="query.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Query</a>
+                        <a href="feedback.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Feedback</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-blue-700 text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-3 flex items-center">
+                    <i data-lucide="stethoscope" class="w-10 h-10 mr-4"></i> Comprehensive Hospital Services
+                </h1>
+                <p class="text-xl md:text-2xl font-light max-w-4xl">
+                    A complete spectrum of healthcare services, delivered with expertise and compassion, to meet every patient's needs.
+                </p>
+            </div>
+        </section>
+        
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-900 mb-12">
+                    Our Core Patient Services
+                </h2>
+
+                <div class="space-y-16">
+                    
+                    <div id="emergency" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-red-600 grid lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-2">
+                            <h3 class="text-3xl font-bold text-red-600 mb-3 flex items-center">
+                                <i data-lucide="ambulance" class="w-8 h-8 mr-3"></i> Accident and Emergency (A&E)
+                            </h3>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                Our **24/7 Emergency Department** is staffed by highly trained emergency physicians, nurses, and support staff, ready to handle all critical and urgent medical conditions. We operate a fully-equipped resuscitation area, trauma bays, and fast-track zones for minor injuries. We are dedicated to providing immediate, life-saving care.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                                <li>**Trauma Center:** Equipped for major accidents and injuries.</li>
+                                <li>**24-Hour Critical Care:** Immediate access to specialized medical teams.</li>
+                                <li>**Rapid Assessment:** Triage system for quick prioritization of cases.</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div id="blood-bank" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-gray-600 grid lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-2">
+                            <h3 class="text-3xl font-bold text-blue-900 mb-3 flex items-center">
+                                <i data-lucide="droplet" class="w-8 h-8 mr-3"></i> Certified Blood Bank
+                            </h3>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                Our state-of-the-art **Blood Bank** ensures a safe, adequate, and reliable supply of blood and blood components for transfusions. We strictly adhere to international standards for screening, storage, and processing. We encourage community members to donate to save lives.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                                <li>**Component Separation:** Providing Packed Red Cells, Platelets, and Fresh Frozen Plasma.</li>
+                                <li>**Safe Donation:** Modern and sterile donation facilities.</li>
+                                <li>**24/7 Availability:** Supporting all hospital departments, especially surgery and A&E.</li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-1 text-center">
+                            <button id="blood-bank-details" class="view-details-btn px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-800 transition duration-300 transform hover:scale-105" data-service="blood-bank">
+                                View Donor Requirements
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="clinics" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-green-600">
+                        <h3 class="text-3xl font-bold text-green-600 mb-3 flex items-center">
+                            <i data-lucide="heart-pulse" class="w-8 h-8 mr-3"></i> Outpatient Clinics
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            We offer comprehensive **Outpatient Clinic** services across all major medical and surgical specialties. Our clinics provide scheduled appointments for diagnostics, consultations, follow-up care, and minor procedures, focusing on preventative care and chronic disease management.
+                        </p>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-gray-600">
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li>General Medicine Clinic</li>
+                                <li>Pediatrics & Child Health</li>
+                                <li>Obstetrics and Gynecology</li>
+                            </ul>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li>Dermatology & Skin Care</li>
+                                <li>Orthopaedics & Physiotherapy</li>
+                                <li>ENT & Eye Clinics</li>
+                            </ul>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li>Diabetics & Endocrine Clinic</li>
+                                <li>Cardiology & Chest Clinic</li>
+                                <li>Gastroenterology Clinic</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="day-care" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-purple-600">
+                        <h3 class="text-3xl font-bold text-purple-600 mb-3 flex items-center">
+                            <i data-lucide="bed" class="w-8 h-8 mr-3"></i> Day Care Services
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Our dedicated **Day Care Unit** is designed for patients who require minor procedures, chemotherapy, diagnostic tests, or short-term medical infusions without the need for an overnight stay. This service offers a convenient, comfortable, and cost-effective alternative to full inpatient admission.
+                        </p>
+                        <p class="text-gray-700 font-semibold text-sm">Key Features:</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                            <li>Post-surgical recovery for minor operations.</li>
+                            <li>Infusion and injection administration for chronic conditions.</li>
+                            <li>Pain management procedures.</li>
+                        </ul>
+                    </div>
+
+                    <div id="operation-theaters" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-orange-600">
+                        <h3 class="text-3xl font-bold text-orange-600 mb-3 flex items-center">
+                            <i data-lucide="scalpel" class="w-8 h-8 mr-3"></i> Advanced Operation Theaters
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Cambridge Hospital operates multiple, fully-integrated **Operation Theaters (OTs)** equipped with cutting-edge surgical technology and monitored by expert anesthesiologists and surgical teams. We accommodate a wide range of procedures from routine surgeries to complex, minimally invasive, and robotic-assisted operations.
+                        </p>
+                        <p class="text-gray-700 font-semibold text-sm">Surgical Capabilities:</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                            <li>Laparoscopic and Endoscopic Surgery (Minimally Invasive)</li>
+                            <li>Cardiothoracic and Neuro-Surgery suites.</li>
+                            <li>Advanced Infection Control protocols.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="nursing" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-blue-500">
+                        <h3 class="text-3xl font-bold text-blue-700 mb-3 flex items-center">
+                            <i data-lucide="user-plus" class="w-8 h-8 mr-3"></i> Professional Nursing Services
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            The backbone of patient care, our **Nursing Services** provide 24-hour compassionate and clinical support. Our nurses are highly trained in critical care, patient education, medication administration, and psychological support, ensuring a holistic recovery environment for all inpatients.
+                        </p>
+                        <p class="text-gray-700 font-semibold text-sm">Key Areas:</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                            <li>Inpatient Ward Nursing (Medical/Surgical)</li>
+                            <li>Intensive Care Unit (ICU) and Coronary Care Unit (CCU) specialists.</li>
+                            <li>Patient and family education on post-discharge care.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="pharmacy" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-yellow-500">
+                        <h3 class="text-3xl font-bold text-yellow-600 mb-3 flex items-center">
+                            <i data-lucide="pills" class="w-8 h-8 mr-3"></i> Comprehensive Pharmacy Services
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Our **Inpatient and Outpatient Pharmacy** provides accurate, timely, and safe medication dispensing. Staffed by registered pharmacists, we offer medication counseling, drug interaction screening, and ensure the availability of all necessary and specialized pharmaceuticals.
+                        </p>
+                        <p class="text-gray-700 font-semibold text-sm">Features:</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                            <li>24/7 Inpatient Drug Dispensing.</li>
+                            <li>Clinical Pharmacist consultation for complex regimens.</li>
+                            <li>Adherence to strict quality control and storage standards.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="social-services" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-teal-600">
+                        <h3 class="text-3xl font-bold text-teal-600 mb-3 flex items-center">
+                            <i data-lucide="users" class="w-8 h-8 mr-3"></i> Patient Social Services
+                        </h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Our **Medical Social Workers** are here to assist patients and families with the challenges of illness and recovery. We provide emotional support, financial assistance guidance, discharge planning, and connections to community resources to ensure a smooth transition back home.
+                        </p>
+                        <p class="text-gray-700 font-semibold text-sm">Support Includes:</p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                            <li>Crisis intervention and counseling.</li>
+                            <li>Financial aid and eligibility assistance.</li>
+                            <li>Post-discharge care coordination.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="oncology-support" class="bg-white p-6 md:p-10 rounded-xl shadow-xl border-l-8 border-pink-600 grid lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-2">
+                            <h3 class="text-3xl font-bold text-pink-600 mb-3 flex items-center">
+                                <i data-lucide="activity" class="w-8 h-8 mr-3"></i> Oncology Support Services
+                            </h3>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                Beyond clinical treatment, our **Oncology Support Services** focus on the holistic well-being of cancer patients. This interdisciplinary approach addresses the physical, psychological, social, and spiritual needs of those undergoing cancer care, from diagnosis through survivorship.
+                            </p>
+                            <p class="text-gray-700 font-semibold text-sm">Dedicated Programs:</p>
+                            <ul class="list-disc list-inside text-gray-600 ml-4 space-y-1 text-sm">
+                                <li>Nutritional Counseling and Rehabilitation.</li>
+                                <li>Pain and Palliative Care.</li>
+                                <li>Oncology-specific psychological support groups.</li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-1 text-center">
+                            <button id="oncology-support-details" class="view-details-btn px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg shadow-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105" data-service="oncology-support">
+                                View Patient Journey
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <div id="story-modal" class="modal-backdrop fixed inset-0 hidden items-center justify-center p-4">
+            <div class="modal-content bg-white p-8 rounded-xl shadow-2xl relative max-w-xl w-full">
+                <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <div id="modal-body">
+                    </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-blue-900 text-gray-200 pt-12 pb-6 mt-16" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10 mb-8">
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">About Us</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                        Every day thousands of people enter the gates of Cambridge Hospital, seeking hope and healing. We are dedicated to providing compassionate, quality, and affordable healthcare services.
+                    </p>
+                    <a href="about.html" class="text-blue-400 text-sm font-medium hover:text-blue-200 transition duration-300">Read More &rarr;</a>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition duration-200">About</a></li>
+                        <li><a href="departments.html" class="hover:text-white transition duration-200">Department</a></li>
+                        <li><a href="services.html" class="hover:text-white transition duration-200">Services</a></li>
+                        <li><a href="centres.html" class="hover:text-white transition duration-200">Centre</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Call Us</span>
+                                (021) 111-456-789
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Email</span>
+                                info@cambridge.edu.pk
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Address</span>
+                                Stadium Road, Karachi, Pakistan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Find Us</h4>
+                    <div class="w-full h-32 bg-blue-800 rounded-lg flex items-center justify-center text-sm text-blue-400">
+                        [Google Map Placeholder]
+                    </div>
+                    <div class="flex space-x-4 mt-4 justify-center md:justify-start">
+                        <i data-lucide="facebook" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="twitter" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="instagram" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="linkedin" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-sm text-blue-400">
+                &copy; 2025 Cambridge Hospital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- Shared Mobile Menu Logic (Copied from index.html) ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open', !isOpen);
+            // On mobile, if the menu is opening, ensure the Services submenu is open by default
+            if (!isOpen) {
+                 const servicesMenu = document.getElementById('services-mobile-menu');
+                 const servicesButtonIcon = document.querySelector('#services-mobile-toggle svg');
+                 servicesMenu.classList.remove('hidden');
+                 servicesButtonIcon.classList.add('rotate-180');
+            }
+        });
+
+        function setupMobileDropdown(buttonId, menuId) {
+            const button = document.getElementById(buttonId);
+            const menu = document.getElementById(menuId);
+
+            if (button && menu) {
+                button.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', !menu.classList.contains('hidden'));
+                    }
+                });
+            }
+        }
+
+        setupMobileDropdown('services-mobile-toggle', 'services-mobile-menu');
+        setupMobileDropdown('centres-mobile-toggle', 'centres-mobile-menu');
+        setupMobileDropdown('more-mobile-toggle', 'more-mobile-menu');
+        setupMobileDropdown('contact-mobile-toggle', 'contact-mobile-menu');
+
+
+        // --- New Modal/Story Logic for Services Page ---
+
+        // Content for the modal based on the data-service attribute
+        const serviceStories = {
+            'blood-bank': {
+                title: "❤️ The Lifesaving Gift: Maria’s Story",
+                icon: "droplet",
+                story: `
+                    <p class="text-gray-700 leading-relaxed">
+                        **Maria**, a young mother, arrived at our A&E after a severe road accident. She needed immediate surgery and multiple blood transfusions to survive. Our Blood Bank was ready. Because of community donors and the dedication of our lab technicians who work around the clock, perfectly matched blood was available instantly.
+                    </p>
+                    <p class="mt-4 text-gray-700 leading-relaxed font-semibold">
+                        This is the silent power of our Blood Bank—a critical, non-stop operation that turns a simple donation into a second chance at life. When you donate, you become an anonymous hero for someone like Maria.
+                    </p>
+                    <h4 class="mt-6 text-xl font-bold text-blue-700">What You Can Do:</h4>
+                    <p class="text-gray-600">Consider becoming a registered donor today. Eligibility requirements ensure the safety of both the donor and the recipient.</p>
+                `
+            },
+            'oncology-support': {
+                title: "🎗️ Journey to Wellness: David's Recovery",
+                icon: "activity",
+                story: `
+                    <p class="text-gray-700 leading-relaxed">
+                        When **David** was diagnosed with cancer, his world paused. Our Oncology Support Services stepped in immediately. It wasn't just about his chemotherapy; it was about the nutritionist helping him manage treatment side effects, the social worker connecting his family with resources, and the counselor giving him the mental fortitude to fight.
+                    </p>
+                    <p class="mt-4 text-gray-700 leading-relaxed font-semibold">
+                        We treat the **person**, not just the disease. Our integrated patient journey ensures that every facet of their life is supported, providing dignity and hope at every stage of their treatment.
+                    </p>
+                    <h4 class="mt-6 text-xl font-bold text-pink-600">Our Commitment:</h4>
+                    <p class="text-gray-600">From diagnosis to survivorship, we provide a multidisciplinary team focused on your total well-being.</p>
+                `
+            }
+        };
+
+        const modal = document.getElementById('story-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const modalBody = document.getElementById('modal-body');
+        const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+
+        viewDetailsButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const serviceKey = e.currentTarget.getAttribute('data-service');
+                const storyData = serviceStories[serviceKey];
+
+                if (storyData) {
+                    // Build modal content
+                    modalBody.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-4 flex items-center text-blue-900">
+                            <i data-lucide="${storyData.icon}" class="w-7 h-7 mr-3 text-red-600"></i>
+                            ${storyData.title}
+                        </h2>
+                        ${storyData.story}
+                    `;
+                    
+                    // Re-initialize Lucide icons within the modal content
+                    lucide.createIcons();
+
+                    // Display the modal and block body scrolling
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close modal logic
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = ''; // Restore body scrolling
+        });
+
+        // Close modal when clicking outside (on the backdrop)
+        modal.addEventListener('click', (e) => {
+            if (e.target.id === 'story-modal') {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

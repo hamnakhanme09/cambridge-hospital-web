@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - Cambridge Hospital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="icon" type="image/svg+xml" href="favicons.jpg">
+
+    <style>
+        :root {
+            --primary-blue: #1e40af; /* Tailwind blue-700 */
+            --light-blue: #3b82f6; /* Tailwind blue-500 */
+            --bg-light: #f3f4f6; /* Tailwind gray-100 */
+            --text-dark: #1f2937; /* Tailwind gray-800 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+        /* Custom hover effect for Nav links (NEW BOX EFFECT) */
+        .nav-link {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-dark);
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--bg-light);
+            color: var(--primary-blue);
+        }
+        
+        /* Custom styles for the dropdowns */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-out;
+            z-index: 50;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Custom Burger Icon Animation */
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: var(--primary-blue);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-icon.open span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .menu-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.open span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        /* Page Header Background */
+        .page-header-bg {
+            background-image: url('department-header.jpg'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Department Card Image Style */
+        .department-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistent cards */
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+        .department-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Modal Backdrop */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    
+    <header class="shadow-md sticky top-0 z-50 bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="Cambridge Hospital Logo" class="h-14 w-auto" />
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="departments.html" class="nav-link active">Departments</a>
+                    
+                    <div class="dropdown relative group">
+                        <a href="services.html" class="nav-link flex items-center">
+                            Services 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Accident and Emergency</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Blood Bank</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Clinics</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Day Care</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Operation Theaters</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Nursing Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Pharmacy Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Social Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Oncology Support Services</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="centres.html" class="nav-link flex items-center">
+                            Centres 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-64 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Cancer Care Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Heart & Vascular Institute</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Neuroscience Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Maternal & Child Health</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Orthopaedic Centre</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item">Rehabilitation Services</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Wellness & Preventive Care</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown relative group">
+                        <a href="#" class="nav-link flex items-center">
+                            More 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="academics.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Academics</a>
+                            <a href="vacancies.html" class="block px-4 py-2 text-gray-700 dropdown-item">Vacancies</a>
+                            <a href="succes-stories.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Success Stories</a>
+                        </div>
+                    </div>
+
+                    <a href="doctor.html" class="nav-link">Doctors</a>
+
+                    <div class="dropdown relative group">
+                        <a href="contact.html" class="nav-link flex items-center">
+                            Contact 
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 transition-all duration-300 transform origin-top">
+                            <a href="query.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-t-md">Query</a>
+                            <a href="feedback.html" class="block px-4 py-2 text-gray-700 dropdown-item rounded-b-md">Feedback</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hidden lg:block ml-6">
+                    <a href="appointment.html" class="px-5 py-2.5 bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden items-center space-x-4">
+                    <a href="appointment.html" class="px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-800 transition duration-300 ease-in-out">
+                        Book
+                    </a>
+                    <button id="mobile-menu-button" class="menu-icon p-2 rounded-lg">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300">
+            <div class="pt-2 pb-4 space-y-1">
+                <a href="index.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Home</a>
+                <a href="about.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">About</a>
+                <a href="departments.html" class="block px-4 py-2 text-base font-medium text-blue-700 bg-blue-50">Departments</a>
+                
+                <div class="px-4">
+                    <button id="services-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Services <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="services-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Accident and Emergency</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Blood Bank</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Clinics</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Day Care</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Operation Theaters</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Nursing Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Pharmacy Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Social Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Oncology Support Services</a>
+                    </div>
+                </div>
+
+                <div class="px-4">
+                    <button id="centres-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Centres <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="centres-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Cancer Care Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Heart & Vascular Institute</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Neuroscience Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Maternal & Child Health</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Orthopaedic Centre</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Rehabilitation Services</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Wellness & Preventive Care</a>
+                    </div>
+                </div>
+                
+                <div class="px-4">
+                    <button id="more-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        More <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="more-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Academics</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Vacancies</a>
+                        <a href="#" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Success Stories</a>
+                    </div>
+                </div>
+
+                <a href="doctor.html" class="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-blue-50">Doctors</a>
+
+                <div class="px-4">
+                    <button id="contact-mobile-toggle" class="flex justify-between items-center w-full py-2 text-base font-medium text-gray-600 hover:bg-blue-50">
+                        Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="contact-mobile-menu" class="hidden pl-4 border-l border-blue-200 space-y-1">
+                        <a href="query.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Query</a>
+                        <a href="feedback.html" class="block py-1 text-sm text-gray-700 hover:text-blue-700">Feedback</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-bg text-white py-24 md:py-32 relative overflow-hidden">
+            <div class="absolute inset-0 bg-blue-900 bg-opacity-80"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <p class="text-xl font-semibold text-blue-300 mb-2 tracking-wider uppercase">Expertise & Specialization</p>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                    Our Medical <span class="text-blue-300">Departments</span>
+                </h1>
+                <p class="mt-4 text-lg max-w-3xl">Explore our centers of excellence, where specialized teams provide world-class, integrated care across a wide range of medical disciplines.</p>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-50" id="departments-grid">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-900 mb-12">
+                    A-Z of Specialized Care
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Accident & Emergency"
+                        data-details="Our state-of-the-art emergency department is open 24/7, providing immediate, life-saving care for all critical medical conditions and traumas. Staffed by highly trained emergency physicians and nurses."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-emergency.jpg" alt="Accident & Emergency team working" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Accident & Emergency</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Cardiology"
+                        data-details="Specializing in the diagnosis and treatment of heart and vascular diseases. We offer advanced procedures including coronary angiography, angioplasty, and full cardiac rehabilitation programs."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-cardiology.jpg" alt="Heart monitor and equipment" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Cardiology</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Oncology"
+                        data-details="The Oncology department provides comprehensive cancer care, including chemotherapy, radiation therapy, surgical oncology, and patient support services, focusing on personalized and compassionate treatment plans."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-oncology.jpg" alt="Medical team discussing results" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Oncology</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Orthopaedic Surgery"
+                        data-details="Dedicated to the musculoskeletal system, offering treatments for bone fractures, joint replacement (hip/knee), sports injuries, and spinal conditions using minimally invasive surgical techniques."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-ortho.jpg" alt="Surgeon performing operation" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Orthopaedic Surgery</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Obstetrics & Gynaecology"
+                        data-details="Providing complete care for women's health, including maternity services, high-risk pregnancy management, fertility treatments, and general gynecological surgery and wellness."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-obgyn.jpg" alt="Doctor consulting a patient" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Obs. & Gynae.</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Pediatric Surgery"
+                        data-details="Dedicated surgical care for infants, children, and adolescents, addressing congenital anomalies, trauma, and general surgical conditions in a child-friendly environment."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-peds.jpg" alt="Child in hospital bed with nurse" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Pediatric Surgery</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Nephrology"
+                        data-details="Specialized treatment for kidney diseases, including acute and chronic kidney failure, dialysis services (hemodialysis and peritoneal dialysis), and kidney transplants."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-nephro.jpg" alt="Dialysis machines" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Nephrology</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div 
+                        class="department-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                        data-department="Neurology"
+                        data-details="Dealing with disorders of the nervous system, including stroke, epilepsy, Parkinson's disease, and multiple sclerosis. We use advanced imaging and neurophysiological testing."
+                    >
+                        <div class="h-48 overflow-hidden">
+                            <img src="dept-neuro.jpg" alt="Neurologist reviewing scans" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-blue-900 mb-3">Neurology</h3>
+                            <button class="view-details-btn px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-blue-700 text-white" id="cta">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    Ready to Consult with a Specialist?
+                </h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto text-blue-100">
+                    If you know which department you need, book your consultation today for priority access to our expert physicians.
+                </p>
+                <a href="appointment.html" class="inline-block px-8 py-4 bg-white text-blue-700 text-lg font-semibold rounded-lg shadow-xl hover:bg-gray-100 transition duration-300 ease-in-out">
+                    Book an Appointment Now
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="department-modal" class="fixed inset-0 hidden z-[100] items-center justify-center p-4">
+        <div class="modal-backdrop fixed inset-0"></div>
+        
+        <div class="bg-white rounded-xl shadow-2xl relative max-w-xl w-full p-8 md:p-10 transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition duration-300">
+                <i data-lucide="x" class="w-7 h-7"></i>
+            </button>
+            
+            <h3 class="text-3xl font-bold text-blue-900 mb-4" id="modal-department-title">Department Name</h3>
+            
+            <hr class="mb-4">
+            
+            <p class="text-lg text-gray-700 leading-relaxed mb-6" id="modal-department-details">
+                [Details about the department will appear here.]
+            </p>
+            
+            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                <a href="appointment.html" class="flex-1 text-center px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition duration-300">
+                    Book Appointment for this Dept.
+                </a>
+                <a href="contact.html" class="flex-1 text-center px-6 py-3 border border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition duration-300">
+                    Contact The Department
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-blue-900 text-gray-200 pt-12 pb-6 mt-16" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10 mb-8">
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Centres of Excellence</h4>
+                    <p class="text-sm leading-relaxed mb-4">
+                       Our focused Centres of Excellence represent the pinnacle of specialized care at Cambridge Hospital. These centres, including our renowned Cardiology Institute and Orthopedic & Joint Replacement Centre, bring together leading experts, cutting-edge research, and state-of-the-art facilities.
+                    </p>
+                    <a href="centres.html" class="text-blue-400 text-sm font-medium hover:text-blue-200 transition duration-300">Read More &rarr;</a>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition duration-200">About</a></li>
+                        <li><a href="departments.html" class="hover:text-white transition duration-200">Department</a></li>
+                        <li><a href="services.html" class="hover:text-white transition duration-200">Services</a></li>
+                        <li><a href="centres.html" class="hover:text-white transition duration-200">Centre</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Call Us</span>
+                                (021) 111-456-789
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Email</span>
+                                info@cambridge.edu.pk
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3 flex-shrink-0 text-blue-400 mt-1"></i>
+                            <div>
+                                <span class="font-medium block text-white">Address</span>
+                                Stadium Road, Karachi, Pakistan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Find Us</h4>
+                    <div class="w-full h-32 bg-blue-800 rounded-lg flex items-center justify-center text-sm text-blue-400">
+                        [Google Map Placeholder]
+                    </div>
+                    <div class="flex space-x-4 mt-4 justify-center md:justify-start">
+                        <i data-lucide="facebook" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="twitter" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="instagram" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                        <i data-lucide="linkedin" class="w-6 h-6 hover:text-white transition cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-sm text-blue-400">
+                &copy; 2025 Cambridge Hospital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // 1. Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open', !isOpen);
+        });
+
+        // 2. Mobile Dropdown Toggle Logic
+        function setupMobileDropdown(buttonId, menuId) {
+            const button = document.getElementById(buttonId);
+            const menu = document.getElementById(menuId);
+
+            if (button && menu) {
+                button.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180', !menu.classList.contains('hidden'));
+                    }
+                });
+            }
+        }
+
+        setupMobileDropdown('services-mobile-toggle', 'services-mobile-menu');
+        setupMobileDropdown('centres-mobile-toggle', 'centres-mobile-menu');
+        setupMobileDropdown('more-mobile-toggle', 'more-mobile-menu');
+        setupMobileDropdown('contact-mobile-toggle', 'contact-mobile-menu');
+
+        // 3. Department Modal Logic
+        const modal = document.getElementById('department-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+        const modalTitle = document.getElementById('modal-department-title');
+        const modalDetails = document.getElementById('modal-department-details');
+        
+        // Function to show the modal
+        function showModal(title, details) {
+            modalTitle.textContent = title;
+            modalDetails.textContent = details;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Add animation classes
+            setTimeout(() => {
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 50); // Small delay to allow 'display: flex' to apply
+            
+            document.body.style.overflow = 'hidden'; // Prevent scrolling the background
+        }
+
+        // Function to hide the modal
+        function hideModal() {
+            // Remove animation classes
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            
+            // Wait for animation before setting display: none
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; // Restore scrolling
+            }, 300); 
+        }
+
+        // Event listener for all "View Details" buttons
+        viewDetailsButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                // Find the nearest parent card with the department data
+                const card = event.target.closest('.department-card');
+                const department = card.getAttribute('data-department');
+                const details = card.getAttribute('data-details');
+                
+                showModal(department, details);
+            });
+        });
+
+        // Event listener for the close button
+        closeModalBtn.addEventListener('click', hideModal);
+
+        // Event listener for clicking outside the modal
+        modal.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal-backdrop')) {
+                hideModal();
+            }
+        });
+        
+        // Event listener for the Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                hideModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
